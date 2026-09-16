@@ -11,7 +11,8 @@ export default function DesignUpload({ onResult, onError, loading, setLoading, r
     try {
       const formData = new FormData();
       formData.append("image", file);
-      const res = await fetch("/api/scan/design", { method: "POST", body: formData });
+      const apiBase = import.meta.env.VITE_API_URL || "";
+      const res = await fetch(`${apiBase}/api/scan/design`, { method: "POST", body: formData });
       if (!res.ok) throw new Error("Analysis failed — try a different image.");
       const data = await res.json();
       onResult(data);

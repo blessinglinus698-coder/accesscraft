@@ -9,7 +9,8 @@ export default function ScanForm({ onResult, onError, loading, setLoading }) {
     setLoading(true);
     onError(null);
     try {
-      const res = await fetch("/api/scan/url", {
+      const apiBase = import.meta.env.VITE_API_URL || "";
+      const res = await fetch(`${apiBase}/api/scan/url`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url }),
