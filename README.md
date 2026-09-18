@@ -53,9 +53,10 @@ MIT
 ## Screenshots
 
 ### Accessibility Scan
-![Accessibility scan results](<Screenshot 2026-09-18 122949.png></Screenshot>) 
-![Accessibility scan result](<Screenshot 2026-09-18 123139.png></screenshot>)
+![Accessibility scan results](screenshots/Access-scan.gif) 
+![Accessibility scan result](screenshots/scan-result-1.png)
+![Accessibility scan result](screenshots/scan-result-2.png)
 
 ### Design to Code
-![Design to code feature](<screenshot 2026-09-18 123321.png></screenshot>)
-![Design to code feature](<screenshots/Accesscraft-design-code-ezgif.com-video-to-gif-converter.gif)
+![Design to code feature](screenshots/Design-to=code1.gif)
+![Design to code feature](screenshots/scan-result-3.png)
