@@ -2,6 +2,8 @@ import express from "express";
 import multer from "multer";
 import { scanUrl } from "../services/accessibilityScanner.js";
 import { analyzeDesignImage } from "../services/designToCode.js";
+import fs from "fs";
+import os from "os";
 
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -9,16 +11,14 @@ const upload = multer({ storage: multer.memoryStorage() });
 // POST /api/scan/url  { url: "https://example.com" }
 
 router.get("/debug-chrome", (req, res) => {
-  const fs = require("fs");
-  const cacheDir = process.env.PUPPETEER_CACHE_DIR || require("os").homedir() + "/.cache/puppeteer";
+  const cacheDir = process.env.PUPPETEER_CACHE_DIR || `${os.homedir()}/.cache/puppeteer`;
   try {
     const contents = fs.readdirSync(cacheDir, { recursive: true });
-    res.json({ cacheDir, contents });
+    res.json({ cacheDir, exists: true, contents });
   } catch (err) {
-    res.json({ cacheDir, error: err.message });
+    res.json({ cacheDir, exists: false, error: err.message });
   }
 });
-
 
 router.post("/url", async (req, res) => {
   const { url } = req.body;
