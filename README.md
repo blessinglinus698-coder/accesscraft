@@ -48,3 +48,14 @@ Visit `http://localhost:5173`. The frontend proxies `/api` requests to the backe
 ## License
 
 MIT
+
+
+## Screenshots
+
+### Accessibility Scan
+![Accessibility scan results](<Screenshot 2026-09-18 122949.png></Screenshot>) 
+![Accessibility scan result](<Screenshot 2026-09-18 123139.png></screenshot>)
+
+### Design to Code
+![Design to code feature](<screenshot 2026-09-18 123321.png></screenshot>)
+![Design to code feature](<screenshots/Accesscraft-design-code-ezgif.com-video-to-gif-converter.gif)
