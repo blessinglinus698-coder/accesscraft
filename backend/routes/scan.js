@@ -7,6 +7,19 @@ const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
 // POST /api/scan/url  { url: "https://example.com" }
+
+router.get("/debug-chrome", (req, res) => {
+  const fs = require("fs");
+  const cacheDir = process.env.PUPPETEER_CACHE_DIR || require("os").homedir() + "/.cache/puppeteer";
+  try {
+    const contents = fs.readdirSync(cacheDir, { recursive: true });
+    res.json({ cacheDir, contents });
+  } catch (err) {
+    res.json({ cacheDir, error: err.message });
+  }
+});
+
+
 router.post("/url", async (req, res) => {
   const { url } = req.body;
   if (!url) return res.status(400).json({ error: "url is required" });
