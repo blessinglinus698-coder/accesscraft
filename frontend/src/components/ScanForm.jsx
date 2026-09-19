@@ -33,12 +33,12 @@ export default function ScanForm({ onResult, onError, loading, setLoading }) {
         placeholder="https://example.com"
         value={url}
         onChange={(e) => setUrl(e.target.value)}
-        className="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-900"
+        className="flex-1 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-400 transition-colors"
       />
       <button
         type="submit"
         disabled={loading}
-        className="bg-gray-900 text-white px-5 py-2 rounded-md font-medium disabled:opacity-50"
+        className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-5 py-2 rounded-md font-medium disabled:opacity-50 transition-colors"
       >
         {loading ? "Scanning..." : "Scan"}
       </button>

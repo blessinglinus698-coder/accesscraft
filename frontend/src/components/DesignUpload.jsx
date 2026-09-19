@@ -9,9 +9,9 @@ export default function DesignUpload({ onResult, onError, loading, setLoading, r
     setLoading(true);
     onError(null);
     try {
+      const apiBase = import.meta.env.VITE_API_URL || "";
       const formData = new FormData();
       formData.append("image", file);
-      const apiBase = import.meta.env.VITE_API_URL || "";
       const res = await fetch(`${apiBase}/api/scan/design`, { method: "POST", body: formData });
       if (!res.ok) throw new Error("Analysis failed — try a different image.");
       const data = await res.json();
@@ -30,12 +30,12 @@ export default function DesignUpload({ onResult, onError, loading, setLoading, r
           type="file"
           accept="image/*"
           onChange={(e) => setFile(e.target.files[0])}
-          className="flex-1 text-sm"
+          className="flex-1 text-sm text-gray-700 dark:text-gray-300 file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:bg-gray-100 dark:file:bg-gray-800 file:text-gray-700 dark:file:text-gray-200 hover:file:bg-gray-200 dark:hover:file:bg-gray-700"
         />
         <button
           type="submit"
           disabled={loading || !file}
-          className="bg-gray-900 text-white px-5 py-2 rounded-md font-medium disabled:opacity-50"
+          className="bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-5 py-2 rounded-md font-medium disabled:opacity-50 transition-colors"
         >
           {loading ? "Analyzing..." : "Analyze"}
         </button>
@@ -47,22 +47,22 @@ export default function DesignUpload({ onResult, onError, loading, setLoading, r
             {result.colors.map((c) => (
               <div key={c.name} className="text-center">
                 <div
-                  className="w-12 h-12 rounded-md border"
+                  className="w-12 h-12 rounded-md border border-gray-300 dark:border-gray-700"
                   style={{ backgroundColor: c.hex }}
                 />
-                <p className="text-xs mt-1">{c.hex}</p>
+                <p className="text-xs mt-1 text-gray-600 dark:text-gray-400">{c.hex}</p>
               </div>
             ))}
           </div>
           <div>
-            <h3 className="font-semibold mb-2">Generated CSS</h3>
-            <pre className="bg-gray-900 text-gray-100 text-sm p-4 rounded-md overflow-x-auto">
+            <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">Generated CSS</h3>
+            <pre className="bg-gray-900 dark:bg-black text-gray-100 text-sm p-4 rounded-md overflow-x-auto border border-transparent dark:border-gray-800">
               {result.starterCss}
             </pre>
           </div>
           <div>
-            <h3 className="font-semibold mb-2">Starter HTML</h3>
-            <pre className="bg-gray-900 text-gray-100 text-sm p-4 rounded-md overflow-x-auto">
+            <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">Starter HTML</h3>
+            <pre className="bg-gray-900 dark:bg-black text-gray-100 text-sm p-4 rounded-md overflow-x-auto border border-transparent dark:border-gray-800">
               {result.starterHtml}
             </pre>
           </div>
