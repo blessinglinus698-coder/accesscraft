@@ -1,0 +1,12 @@
+# Code owners are automatically requested for review on pull requests.
+# Later patterns take precedence over earlier ones.
+
+*                       @blessinglinus698-coder
+
+/backend/               @blessinglinus698-coder
+/frontend/              @blessinglinus698-coder
+
+# Security-sensitive and project-governance files
+/.github/               @blessinglinus698-coder
+/SECURITY.md            @blessinglinus698-coder
+/backend/Dockerfile     @blessinglinus698-coder

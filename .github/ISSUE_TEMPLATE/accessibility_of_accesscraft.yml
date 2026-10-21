@@ -1,0 +1,43 @@
+name: Accessibility barrier in AccessCraft
+description: AccessCraft's own interface is hard or impossible to use with assistive technology
+title: "a11y: "
+labels: ["type: bug", "area: a11y", "priority: high", "status: needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        An accessibility tool has to be accessible. We treat barriers in our own UI as high-priority bugs. Thank you for reporting one.
+  - type: textarea
+    id: barrier
+    attributes:
+      label: What barrier did you encounter?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: input
+    id: at
+    attributes:
+      label: Assistive technology and version
+      placeholder: "NVDA 2024.3, VoiceOver macOS 15, keyboard only, Windows High Contrast"
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and OS
+    validations:
+      required: true
+  - type: input
+    id: wcag
+    attributes:
+      label: Related WCAG success criterion (if known)
+      placeholder: "2.1.1 Keyboard"
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context

@@ -1,0 +1,71 @@
+name: Feature request
+description: Propose a new feature or an improvement
+title: "feat: "
+labels: ["type: feature", "status: needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion. For open-ended ideas, consider starting a thread in [Discussions](https://github.com/blessinglinus698-coder/accesscraft/discussions) first.
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Pre-flight checklist
+      options:
+        - label: I searched existing issues and discussions for similar requests
+          required: true
+        - label: I have read the roadmap in the README
+          required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Accessibility scanner
+        - Design-to-code
+        - Frontend UI / UX
+        - Backend API
+        - Reports / export
+        - Accounts / auth
+        - Developer experience / tooling
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or motivation
+      description: What are you trying to do, and what gets in the way today?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe what you would like to happen. Mockups and API sketches are welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: textarea
+    id: a11y
+    attributes:
+      label: Accessibility considerations
+      description: How should this work with keyboards, screen readers, reduced motion and high contrast?
+  - type: dropdown
+    id: priority
+    attributes:
+      label: How important is this to you?
+      options:
+        - Nice to have
+        - Important
+        - Blocking my use of AccessCraft
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contribution
+      options:
+        - label: I would be willing to implement this
