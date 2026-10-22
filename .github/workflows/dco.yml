@@ -36,7 +36,7 @@ jobs:
             author_email=$(git log -1 --format='%ae' "$sha")
             subject=$(git log -1 --format='%s' "$sha")
 
-            # Dependabot and other bots cannot sign off.
+            # Bots cannot sign off.
             case "$author_email" in
               *"[bot]@users.noreply.github.com") continue ;;
             esac

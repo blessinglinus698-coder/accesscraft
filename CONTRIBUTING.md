@@ -128,7 +128,7 @@ git rebase HEAD~3 --signoff
 git push --force-with-lease
 ```
 
-The `DCO` check blocks merging until all commits are signed off. Commits from bots such as Dependabot are exempt.
+The `DCO` check blocks merging until all commits are signed off. Commits from bots are exempt.
 
 ## Pull request process
 

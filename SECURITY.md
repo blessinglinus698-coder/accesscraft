@@ -56,4 +56,4 @@ We will not pursue legal action against researchers who act in good faith, avoid
 - Run the backend in a container as a non-root user and restrict its network egress.
 - Block scanning of private, loopback and link-local address ranges.
 - Never commit `.env` files. Use `.env.example` as a template.
-- Keep dependencies current; Dependabot is enabled on this repository.
+- Keep dependencies current and review them for known vulnerabilities.
