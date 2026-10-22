@@ -1,0 +1,111 @@
+name: Bug report
+description: Something in AccessCraft is broken or behaves unexpectedly
+title: "bug: "
+labels: ["type: bug", "status: needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. Please search [existing issues](https://github.com/blessinglinus698-coder/accesscraft/issues?q=is%3Aissue) first.
+        **Security vulnerabilities must not be reported here.** Use a [private advisory](https://github.com/blessinglinus698-coder/accesscraft/security/advisories/new).
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Pre-flight checklist
+      options:
+        - label: I searched existing issues and this has not been reported
+          required: true
+        - label: I am running the latest `main` or the latest release
+          required: true
+        - label: I have read the Code of Conduct
+          required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - Accessibility scanner (axe-core / Puppeteer)
+        - Design-to-code
+        - Frontend UI
+        - Backend API
+        - Database / scan history
+        - Docker / deployment
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Minimal, numbered steps. Include the URL scanned or the image used if you can share it.
+      placeholder: |
+        1. Go to ...
+        2. Enter the URL ...
+        3. Click ...
+        4. See error
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs and screenshots
+      description: Backend console output, browser console errors, network responses, screenshots. Remove any secrets.
+      render: shell
+  - type: input
+    id: version
+    attributes:
+      label: AccessCraft version or commit
+      placeholder: "v1.0.0 or 171b04f"
+    validations:
+      required: true
+  - type: dropdown
+    id: runtime
+    attributes:
+      label: How are you running it?
+      options:
+        - Local (npm run dev)
+        - Docker
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "Windows 11, macOS 15, Ubuntu 24.04"
+    validations:
+      required: true
+  - type: input
+    id: node
+    attributes:
+      label: Node.js version
+      placeholder: "20.11.0"
+  - type: input
+    id: browser
+    attributes:
+      label: Browser (frontend issues)
+      placeholder: "Firefox 130, Chrome 128"
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional context
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contribution
+      options:
+        - label: I would be willing to submit a pull request to fix this

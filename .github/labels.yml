@@ -1,0 +1,37 @@
+# Source of truth for repository labels. Synced by .github/workflows/labels-sync.yml.
+- { name: "type: bug",             color: "d73a4a", description: "Something is not working" }
+- { name: "type: feature",         color: "0e8a16", description: "New feature or request" }
+- { name: "type: docs",            color: "0075ca", description: "Documentation" }
+- { name: "type: chore",           color: "ededed", description: "Maintenance and tooling" }
+- { name: "type: refactor",        color: "c5def5", description: "Code change with no behavior change" }
+- { name: "type: dependencies",    color: "0366d6", description: "Dependency updates" }
+- { name: "type: scan-accuracy",   color: "fbca04", description: "False positive or negative in scan results" }
+- { name: "type: security",        color: "b60205", description: "Security-related change" }
+- { name: "type: breaking",        color: "b60205", description: "Breaking change" }
+
+- { name: "area: scanner",         color: "5319e7", description: "axe-core / Puppeteer scanning" }
+- { name: "area: design-to-code",  color: "5319e7", description: "Image to HTML/CSS" }
+- { name: "area: frontend",        color: "1d76db", description: "React / Vite UI" }
+- { name: "area: backend",         color: "1d76db", description: "Express API" }
+- { name: "area: a11y",            color: "7057ff", description: "Accessibility of AccessCraft itself" }
+- { name: "area: infra",           color: "bfd4f2", description: "Docker and deployment" }
+- { name: "area: ci",              color: "bfd4f2", description: "GitHub Actions and automation" }
+- { name: "area: community",       color: "bfd4f2", description: "Community health files" }
+
+- { name: "status: needs-triage",  color: "ededed", description: "Awaiting maintainer review" }
+- { name: "status: needs-info",    color: "d876e3", description: "More information required from the reporter" }
+- { name: "status: confirmed",     color: "0e8a16", description: "Reproduced or accepted" }
+- { name: "status: blocked",       color: "b60205", description: "Blocked by something else" }
+- { name: "status: wontfix",       color: "ffffff", description: "Will not be worked on" }
+- { name: "status: stale",         color: "cccccc", description: "No recent activity" }
+- { name: "status: pinned",        color: "006b75", description: "Exempt from the stale bot" }
+
+- { name: "priority: high",        color: "b60205", description: "Needs attention soon" }
+- { name: "priority: medium",      color: "fbca04", description: "Normal priority" }
+- { name: "priority: low",         color: "c2e0c6", description: "Nice to have" }
+
+- { name: "good first issue",      color: "7057ff", description: "Good for newcomers" }
+- { name: "help wanted",           color: "008672", description: "Extra attention is needed" }
+- { name: "duplicate",             color: "cfd3d7", description: "Already reported" }
+- { name: "invalid",               color: "e4e669", description: "Not valid" }
+- { name: "dco-failed",            color: "b60205", description: "Commits are missing a Signed-off-by line" }

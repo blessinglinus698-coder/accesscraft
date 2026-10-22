@@ -1,0 +1,31 @@
+"area: backend":
+  - changed-files:
+      - any-glob-to-any-file: "backend/**"
+
+"area: frontend":
+  - changed-files:
+      - any-glob-to-any-file: "frontend/**"
+
+"area: scanner":
+  - changed-files:
+      - any-glob-to-any-file: ["backend/services/**", "backend/routes/**"]
+
+"area: infra":
+  - changed-files:
+      - any-glob-to-any-file: ["backend/Dockerfile", "**/Dockerfile", "**/.dockerignore"]
+
+"area: ci":
+  - changed-files:
+      - any-glob-to-any-file: ".github/workflows/**"
+
+"type: docs":
+  - changed-files:
+      - any-glob-to-any-file: ["**/*.md", "screenshots/**"]
+
+"type: dependencies":
+  - changed-files:
+      - any-glob-to-any-file: ["**/package.json", "**/package-lock.json"]
+
+"area: community":
+  - changed-files:
+      - any-glob-to-any-file: [".github/**", "LICENSE", "SECURITY.md", "CONTRIBUTING.md", "CODE_OF_CONDUCT.md"]

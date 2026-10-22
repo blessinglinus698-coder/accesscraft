@@ -1,0 +1,121 @@
+name: DCO
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: dco-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  dco:
+    name: DCO sign-off
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify Signed-off-by on every commit
+        id: check
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -uo pipefail
+          failed=0
+          report=""
+          for sha in $(git rev-list --no-merges "$BASE_SHA..$HEAD_SHA"); do
+            author_name=$(git log -1 --format='%an' "$sha")
+            author_email=$(git log -1 --format='%ae' "$sha")
+            subject=$(git log -1 --format='%s' "$sha")
+
+            # Dependabot and other bots cannot sign off.
+            case "$author_email" in
+              *"[bot]@users.noreply.github.com") continue ;;
+            esac
+
+            if git log -1 --format='%B' "$sha" \
+              | grep -iqE "^Signed-off-by: .+ <.+@.+>[[:space:]]*$"; then
+              if git log -1 --format='%B' "$sha" \
+                | grep -iqF "Signed-off-by: $author_name <$author_email>"; then
+                echo "OK    ${sha:0:7} $subject"
+              else
+                echo "::error::${sha:0:7} has a sign-off that does not match the author ($author_name <$author_email>)"
+                report+="- \`${sha:0:7}\` $subject (sign-off does not match author \`$author_name <$author_email>\`)"$'\n'
+                failed=1
+              fi
+            else
+              echo "::error::${sha:0:7} is missing a Signed-off-by line"
+              report+="- \`${sha:0:7}\` $subject (missing sign-off)"$'\n'
+              failed=1
+            fi
+          done
+
+          {
+            echo "failed=$failed"
+            echo "report<<EOF"
+            printf '%s' "$report"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+          if [ "$failed" -ne 0 ]; then
+            echo "One or more commits are not signed off. See CONTRIBUTING.md."
+            exit 1
+          fi
+
+      - name: Comment with fix instructions
+        if: failure() && steps.check.outputs.failed == '1' && github.event.pull_request.head.repo.full_name == github.repository
+        uses: actions/github-script@v7
+        env:
+          REPORT: ${{ steps.check.outputs.report }}
+        with:
+          script: |
+            const marker = '<!-- dco-bot -->';
+            const body = `${marker}
+            ### DCO sign-off required
+
+            Every commit must carry a \`Signed-off-by\` line that matches its author, certifying the [Developer Certificate of Origin](https://developercertificate.org/).
+
+            Affected commits:
+
+            ${process.env.REPORT}
+
+            **Fix the latest commit:**
+            \`\`\`bash
+            git commit --amend --no-edit --signoff
+            git push --force-with-lease
+            \`\`\`
+
+            **Fix several commits:**
+            \`\`\`bash
+            git rebase HEAD~N --signoff   # N = number of commits in this PR
+            git push --force-with-lease
+            \`\`\`
+
+            See [CONTRIBUTING.md](https://github.com/blessinglinus698-coder/accesscraft/blob/main/CONTRIBUTING.md#developer-certificate-of-origin-dco) for details.`;
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.pull_request.number;
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number });
+            const existing = comments.find(c => c.body && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
+            await github.rest.issues.addLabels({ owner, repo, issue_number, labels: ['dco-failed'] }).catch(() => {});
+
+      - name: Clear DCO failure label
+        if: success() && github.event.pull_request.head.repo.full_name == github.repository
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.pull_request.number;
+            await github.rest.issues.removeLabel({ owner, repo, issue_number, name: 'dco-failed' }).catch(() => {});

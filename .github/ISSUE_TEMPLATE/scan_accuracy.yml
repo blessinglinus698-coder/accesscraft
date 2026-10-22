@@ -1,0 +1,58 @@
+name: Scan accuracy report
+description: A false positive, false negative or unclear explanation in accessibility scan results
+title: "scan: "
+labels: ["type: scan-accuracy", "area: scanner", "status: needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template when AccessCraft reports an issue that is not real (false positive), misses a real issue (false negative), or explains an issue incorrectly or confusingly.
+        If the underlying rule is wrong in axe-core itself, we may forward it upstream to [dequelabs/axe-core](https://github.com/dequelabs/axe-core).
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind of problem
+      options:
+        - False positive (reported, but not an issue)
+        - False negative (real issue not reported)
+        - Wrong or confusing plain-English explanation
+        - Wrong severity or impact
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: URL scanned
+      description: A public URL, or "N/A, see snippet below".
+    validations:
+      required: true
+  - type: input
+    id: rule
+    attributes:
+      label: axe rule ID
+      placeholder: "color-contrast, image-alt, label"
+  - type: textarea
+    id: snippet
+    attributes:
+      label: Minimal HTML snippet
+      description: The smallest HTML that reproduces the result.
+      render: html
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result and reasoning
+      description: Cite the relevant WCAG success criterion if you can (for example, 1.4.3 Contrast).
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: AccessCraft version or commit
+    validations:
+      required: true

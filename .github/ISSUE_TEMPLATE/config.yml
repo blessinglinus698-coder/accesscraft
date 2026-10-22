@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/blessinglinus698-coder/accesscraft/security/advisories/new
+    about: Please report vulnerabilities privately. Do NOT open a public issue. See SECURITY.md.
+  - name: Ask a question or share an idea
+    url: https://github.com/blessinglinus698-coder/accesscraft/discussions
+    about: Usage questions, ideas and general discussion belong in Discussions, not Issues.
+  - name: Read the contributing guide
+    url: https://github.com/blessinglinus698-coder/accesscraft/blob/main/CONTRIBUTING.md
+    about: Learn how to set up the project, sign off commits (DCO) and open a pull request.

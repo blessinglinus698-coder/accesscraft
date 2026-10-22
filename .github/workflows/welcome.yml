@@ -1,0 +1,28 @@
+name: Welcome
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  greet:
+    name: Greet first-time contributors
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: |
+            Thanks for opening your first issue in AccessCraft. A maintainer will triage it soon.
+            Please make sure you have filled in all requested details so we can reproduce the problem.
+          pr-message: |
+            Thanks for your first pull request. Before review, please check that:
+            - every commit is signed off (`git commit -s`), see [CONTRIBUTING.md](https://github.com/blessinglinus698-coder/accesscraft/blob/main/CONTRIBUTING.md#developer-certificate-of-origin-dco)
+            - the PR title follows Conventional Commits
+            - CI is green
