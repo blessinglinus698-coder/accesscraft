@@ -12,7 +12,7 @@
 
 "area: infra":
   - changed-files:
-      - any-glob-to-any-file: ["backend/Dockerfile", "**/Dockerfile", "**/.dockerignore"]
+      - any-glob-to-any-file: ["backend/Dockerfile", "**/Dockerfile", "**/.dockerignore", "**/docker-compose*.yml"]
 
 "area: ci":
   - changed-files:

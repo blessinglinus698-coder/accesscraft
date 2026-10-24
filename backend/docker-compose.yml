@@ -1,0 +1,37 @@
+# Backend API only.
+#
+#   cd backend && docker compose up --build
+#
+# Health check: http://localhost:5000/api/health
+
+name: accesscraft-backend
+
+services:
+  backend:
+    build:
+      context: .
+    image: accesscraft-backend:local
+    init: true # reap zombie Chrome processes
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      PORT: "5000"
+    ports:
+      - "${BACKEND_PORT:-5000}:5000"
+    shm_size: "1gb" # Chrome crashes with the default 64mb /dev/shm
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:5000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
