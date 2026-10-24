@@ -35,6 +35,18 @@ npm run dev
 
 Visit `http://localhost:5173`. The frontend proxies `/api` requests to the backend on port 5000.
 
+### Docker
+
+```bash
+docker compose up --build
+```
+
+The app is served at `http://localhost:8080` and the API at `http://localhost:5000/api/health`. Copy `.env.example` to `.env` to change ports. To run only the API, use `docker compose up --build` inside `backend/`.
+
+### AI coding agents
+
+Guidance for AI tools lives in [AGENTS.md](AGENTS.md).
+
 ## Roadmap
 
 - [x] URL accessibility scanning with axe-core
